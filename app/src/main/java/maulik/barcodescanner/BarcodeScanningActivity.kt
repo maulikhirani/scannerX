@@ -62,7 +62,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 
-        imageAnalysis.setAnalyzer(cameraExecutor, YourImageAnalyzer())
+        imageAnalysis.setAnalyzer(cameraExecutor, ZXingBarcodeAnalyzer())
 
         preview.setSurfaceProvider(binding.cameraPreview.createSurfaceProvider())
 

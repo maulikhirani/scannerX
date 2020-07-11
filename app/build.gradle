@@ -43,8 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    // Use this dependency to bundle the model with your app
-    implementation 'com.google.mlkit:barcode-scanning:16.0.1'
+    implementation 'com.google.zxing:core:3.2.0'
 
     // CameraX core library using the camera2 implementation
     def camerax_version = "1.0.0-beta06"

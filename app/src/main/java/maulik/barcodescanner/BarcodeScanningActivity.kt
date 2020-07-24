@@ -62,7 +62,8 @@ class BarcodeScanningActivity : AppCompatActivity() {
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 
-        imageAnalysis.setAnalyzer(cameraExecutor, ZXingBarcodeAnalyzer())
+        //switch the analyzers here, i.e. MLKitBarcodeAnalyzer, ZXingBarcodeAnalyzer
+        imageAnalysis.setAnalyzer(cameraExecutor, MLKitBarcodeAnalyzer())
 
         preview.setSurfaceProvider(binding.cameraPreview.createSurfaceProvider())
 

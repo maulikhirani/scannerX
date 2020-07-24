@@ -43,7 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.google.zxing:core:3.2.0'
+    implementation 'com.google.zxing:core:3.3.3'
 
     // CameraX core library using the camera2 implementation
     def camerax_version = "1.0.0-beta06"

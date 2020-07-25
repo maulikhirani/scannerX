@@ -3,11 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    tools:background="@android:color/white"
     tools:context=".BarcodeScanningActivity">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/cameraPreview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/ivFlashControl"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_margin="16dp"
+        android:background="@drawable/flash_button_background"
+        android:contentDescription="@string/turn_flash_on_off"
+        android:padding="12dp"
+        android:src="@drawable/ic_round_flash_on" />
 
 </FrameLayout>

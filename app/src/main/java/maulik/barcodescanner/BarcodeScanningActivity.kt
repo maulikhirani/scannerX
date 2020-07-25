@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.util.Size
 import android.view.OrientationEventListener
 import android.view.Surface
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
+import androidx.camera.core.TorchState
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.google.common.util.concurrent.ListenableFuture
 import maulik.barcodescanner.databinding.ActivityBarcodeScanningBinding
 import java.util.concurrent.ExecutorService
@@ -31,6 +34,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBarcodeScanningBinding
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
+    private var flashEnabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +62,6 @@ class BarcodeScanningActivity : AppCompatActivity() {
             .requireLensFacing(CameraSelector.LENS_FACING_BACK)
             .build()
 
-
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(1280, 720))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -84,7 +87,30 @@ class BarcodeScanningActivity : AppCompatActivity() {
 
         preview.setSurfaceProvider(binding.cameraPreview.createSurfaceProvider())
 
-        cameraProvider?.bindToLifecycle(this, cameraSelector, imageAnalysis, preview)
+        val camera =
+            cameraProvider?.bindToLifecycle(this, cameraSelector, imageAnalysis, preview)
+
+        if (camera?.cameraInfo?.hasFlashUnit() == true) {
+            binding.ivFlashControl.visibility = View.VISIBLE
+
+            binding.ivFlashControl.setOnClickListener {
+                camera.cameraControl.enableTorch(!flashEnabled)
+            }
+
+            camera.cameraInfo.torchState.observe(this, Observer {
+                it?.let { torchState ->
+                    if (torchState == TorchState.ON) {
+                        flashEnabled = true
+                        binding.ivFlashControl.setImageResource(R.drawable.ic_round_flash_on)
+                    } else {
+                        flashEnabled = false
+                        binding.ivFlashControl.setImageResource(R.drawable.ic_round_flash_off)
+                    }
+                }
+            })
+        }
+
+
     }
 
     override fun onDestroy() {

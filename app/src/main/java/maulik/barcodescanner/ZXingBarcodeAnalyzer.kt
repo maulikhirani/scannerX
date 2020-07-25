@@ -34,13 +34,16 @@ class ZXingBarcodeAnalyzer : ImageAnalysis.Analyzer {
             val bytes = ByteArray(buffer.remaining())
             buffer.get(bytes)
 
+            val rotatedImage = RotatedImage(bytes, image.width, image.height)
+            rotateImageArray(rotatedImage, image.imageInfo.rotationDegrees)
+
             val planarYUVLuminanceSource = PlanarYUVLuminanceSource(
-                bytes,
-                image.width,
-                image.height,
+                rotatedImage.byteArray,
+                rotatedImage.width,
+                rotatedImage.height,
                 0, 0,
-                image.width,
-                image.height,
+                rotatedImage.width,
+                rotatedImage.height,
                 false
             )
             val hybridBinarizer = HybridBinarizer(planarYUVLuminanceSource)
@@ -58,4 +61,36 @@ class ZXingBarcodeAnalyzer : ImageAnalysis.Analyzer {
             isScanning.set(false)
         }
     }
+
+    // 90, 180. 270 rotation
+    private fun rotateImageArray(imageToRotate: RotatedImage, rotationDegrees: Int) {
+        if (rotationDegrees == 0) return // no rotation
+        if (rotationDegrees % 90 != 0) return // only 90 degree times rotations
+
+        val width = imageToRotate.width
+        val height = imageToRotate.height
+
+        val rotatedData = ByteArray(imageToRotate.byteArray.size)
+        for (y in 0 until height) { // we scan the array by rows
+            for (x in 0 until width) {
+                when (rotationDegrees) {
+                    90 -> rotatedData[x * height + height - y - 1] =
+                        imageToRotate.byteArray[x + y * width] // Fill from top-right toward left (CW)
+                    180 -> rotatedData[width * (height - y - 1) + width - x - 1] =
+                        imageToRotate.byteArray[x + y * width] // Fill from bottom-right toward up (CW)
+                    270 -> rotatedData[y + x * height] =
+                        imageToRotate.byteArray[y * width + width - x - 1] // The opposite (CCW) of 90 degrees
+                }
+            }
+        }
+
+        imageToRotate.byteArray = rotatedData
+
+        if (rotationDegrees != 180) {
+            imageToRotate.height = width
+            imageToRotate.width = height
+        }
+    }
+
+    private class RotatedImage(var byteArray: ByteArray, var width: Int, var height: Int)
 }

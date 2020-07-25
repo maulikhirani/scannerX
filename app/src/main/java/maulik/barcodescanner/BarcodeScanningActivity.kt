@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Size
+import android.view.OrientationEventListener
+import android.view.Surface
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -61,6 +63,21 @@ class BarcodeScanningActivity : AppCompatActivity() {
             .setTargetResolution(Size(1280, 720))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
+
+        val orientationEventListener = object : OrientationEventListener(this as Context) {
+            override fun onOrientationChanged(orientation : Int) {
+                // Monitors orientation values to determine the target rotation value
+                val rotation : Int = when (orientation) {
+                    in 45..134 -> Surface.ROTATION_270
+                    in 135..224 -> Surface.ROTATION_180
+                    in 225..314 -> Surface.ROTATION_90
+                    else -> Surface.ROTATION_0
+                }
+
+                imageAnalysis.targetRotation = rotation
+            }
+        }
+        orientationEventListener.enable()
 
         //switch the analyzers here, i.e. MLKitBarcodeAnalyzer, ZXingBarcodeAnalyzer
         imageAnalysis.setAnalyzer(cameraExecutor, MLKitBarcodeAnalyzer())

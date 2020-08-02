@@ -12,6 +12,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <maulik.barcodescanner.ViewFinderOverlay
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvScanningWith"
+            android:textStyle="bold"
+            android:text="@string/scanning_with"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:src="@drawable/mlkit_icon"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/scanner_library" />
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/ivFlashControl"
         android:layout_width="60dp"

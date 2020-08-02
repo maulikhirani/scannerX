@@ -49,6 +49,10 @@ class BarcodeScanningActivity : AppCompatActivity() {
             val cameraProvider = cameraProviderFuture.get()
             bindPreview(cameraProvider)
         }, ContextCompat.getMainExecutor(this))
+
+        binding.overlay.post {
+            binding.overlay.setViewFinder()
+        }
     }
 
     private fun bindPreview(cameraProvider: ProcessCameraProvider?) {

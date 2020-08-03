@@ -13,8 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".BarcodeScanningActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".MainActivity">
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/FullScreenTheme"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

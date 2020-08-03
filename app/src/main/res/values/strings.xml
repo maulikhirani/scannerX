@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">Barcode Scanner</string>
+    <string name="app_name">QR/Barcode Scanner</string>
     <string name="start_scanning">Start Scanning</string>
     <string name="turn_flash_on_off">Turn Flash On/Off</string>
     <string name="view_finder">View Finder</string>
     <string name="scanning_with">Scanning with</string>
     <string name="scanner_library">Scanner Library</string>
+    <string name="result">Result</string>
+    <string name="copy">Copy</string>
+    <string name="scan_with_ml_kit_bundled">Scan with ML Kit (Bundled)</string>
+    <string name="scan_with_zxing">Scan with ZXing</string>
+    <string name="developed_by_maulik_hirani">Developed by Maulik Hirani</string>
 </resources>

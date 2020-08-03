@@ -20,12 +20,16 @@ import maulik.barcodescanner.databinding.ActivityBarcodeScanningBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+const val ARG_SCANNING_SDK = "scanning_SDK"
+
 class BarcodeScanningActivity : AppCompatActivity() {
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
-            val starter = Intent(context, BarcodeScanningActivity::class.java)
+        fun start(context: Context, scannerSDK: ScannerSDK) {
+            val starter = Intent(context, BarcodeScanningActivity::class.java).apply {
+                putExtra(ARG_SCANNING_SDK, scannerSDK)
+            }
             context.startActivity(starter)
         }
     }
@@ -35,11 +39,19 @@ class BarcodeScanningActivity : AppCompatActivity() {
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
     private var flashEnabled = false
+    private var scannerSDK: ScannerSDK = ScannerSDK.MLKIT //default is MLKit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBarcodeScanningBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        scannerSDK = intent?.getSerializableExtra(ARG_SCANNING_SDK) as ScannerSDK
+
+        when (scannerSDK) {
+            ScannerSDK.MLKIT -> binding.ivScannerLogo.setImageResource(R.drawable.mlkit_icon)
+            ScannerSDK.ZXING -> binding.ivScannerLogo.setImageResource(R.drawable.zxing)
+        }
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         // Initialize our background executor
@@ -56,6 +68,12 @@ class BarcodeScanningActivity : AppCompatActivity() {
     }
 
     private fun bindPreview(cameraProvider: ProcessCameraProvider?) {
+
+        if (isDestroyed || isFinishing) {
+            //This check is to avoid an exception when trying to re-bind use cases but user closes the activity.
+            //java.lang.IllegalArgumentException: Trying to create use case mediator with destroyed lifecycle.
+            return
+        }
 
         cameraProvider?.unbindAll()
 
@@ -87,7 +105,29 @@ class BarcodeScanningActivity : AppCompatActivity() {
         orientationEventListener.enable()
 
         //switch the analyzers here, i.e. MLKitBarcodeAnalyzer, ZXingBarcodeAnalyzer
-        imageAnalysis.setAnalyzer(cameraExecutor, MLKitBarcodeAnalyzer())
+        class ScanningListener : ScanningResultListener {
+            override fun onScanned(result: String) {
+                runOnUiThread {
+                    imageAnalysis.clearAnalyzer()
+                    cameraProvider?.unbindAll()
+                    ScannerResultDialog
+                        .newInstance(result, object : ScannerResultDialog.DialogDismissListener {
+                            override fun onDismiss() {
+                                bindPreview(cameraProvider)
+                            }
+                        })
+                        .show(supportFragmentManager, ScannerResultDialog::class.java.simpleName)
+                }
+            }
+        }
+
+        var analyzer: ImageAnalysis.Analyzer = MLKitBarcodeAnalyzer(ScanningListener())
+
+        if (scannerSDK == ScannerSDK.ZXING) {
+            analyzer = ZXingBarcodeAnalyzer(ScanningListener())
+        }
+
+        imageAnalysis.setAnalyzer(cameraExecutor, analyzer)
 
         preview.setSurfaceProvider(binding.cameraPreview.createSurfaceProvider())
 
@@ -121,5 +161,10 @@ class BarcodeScanningActivity : AppCompatActivity() {
         super.onDestroy()
         // Shut down our background executor
         cameraExecutor.shutdown()
+    }
+
+    enum class ScannerSDK {
+        MLKIT,
+        ZXING
     }
 }

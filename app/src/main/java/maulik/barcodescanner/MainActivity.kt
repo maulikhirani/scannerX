@@ -6,23 +6,35 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.view.View
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import maulik.barcodescanner.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
 
     private val cameraPermissionRequestCode = 1
-
+    private var selectedScanningSDK = BarcodeScanningActivity.ScannerSDK.MLKIT
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
+
+        binding.cardMlKit.setOnClickListener {
+            selectedScanningSDK = BarcodeScanningActivity.ScannerSDK.MLKIT
+            startScanning()
+        }
+        binding.cardZxing.setOnClickListener {
+            selectedScanningSDK = BarcodeScanningActivity.ScannerSDK.ZXING
+            startScanning()
+        }
     }
 
-    fun startScanning(view: View) {
+    fun startScanning() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.CAMERA
@@ -61,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openCameraWithScanner() {
-        BarcodeScanningActivity.start(this)
+        BarcodeScanningActivity.start(this, selectedScanningSDK)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

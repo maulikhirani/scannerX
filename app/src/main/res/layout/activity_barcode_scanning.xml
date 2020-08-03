@@ -35,8 +35,11 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
+            android:id="@+id/ivScannerLogo"
             android:layout_marginTop="8dp"
-            android:src="@drawable/mlkit_icon"
+            android:padding="8dp"
+            android:background="@drawable/scanner_logo_background"
+            android:src="@drawable/zxing"
             android:adjustViewBounds="true"
             android:layout_width="100dp"
             android:layout_height="wrap_content"

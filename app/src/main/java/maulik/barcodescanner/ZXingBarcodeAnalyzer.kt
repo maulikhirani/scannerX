@@ -13,7 +13,7 @@ import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
 
 
-class ZXingBarcodeAnalyzer : ImageAnalysis.Analyzer {
+class ZXingBarcodeAnalyzer(val listener: ScanningResultListener) : ImageAnalysis.Analyzer {
 
     private var multiFormatReader: MultiFormatReader = MultiFormatReader()
     private var isScanning = AtomicBoolean(false)
@@ -51,6 +51,7 @@ class ZXingBarcodeAnalyzer : ImageAnalysis.Analyzer {
             try {
                 val rawResult = multiFormatReader.decodeWithState(binaryBitmap)
                 Log.d("Barcode:", rawResult.text)
+                listener.onScanned(rawResult.text)
             } catch (e: NotFoundException) {
                 e.printStackTrace()
             } finally {

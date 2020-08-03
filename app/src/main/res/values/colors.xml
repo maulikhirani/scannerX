@@ -3,6 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorCopyButton">#00897B</color>
+    <color name="colorMLKitCard">#FFCCBC</color>
+    <color name="colorZxingCard">#BBDEFB</color>
 
     <color name="barcode_reticle_background">#99000000</color>
     <color name="barcode_reticle_stroke">#ffffff</color>

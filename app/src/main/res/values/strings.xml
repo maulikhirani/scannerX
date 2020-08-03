@@ -7,7 +7,7 @@
     <string name="scanner_library">Scanner Library</string>
     <string name="result">Result</string>
     <string name="copy">Copy</string>
-    <string name="scan_with_ml_kit_bundled">Scan with ML Kit (Bundled)</string>
+    <string name="scan_with_ml_kit">Scan with ML Kit</string>
     <string name="scan_with_zxing">Scan with ZXing</string>
     <string name="developed_by_maulik_hirani">Developed by Maulik Hirani</string>
 </resources>

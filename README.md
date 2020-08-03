@@ -35,7 +35,7 @@ You can pick which SDK you want to use for scanning from the app itself. This wi
 Your feedback and suggestions are most welcome!
 
 References:
-https://developer.android.com/training/camerax
-https://developers.google.com/ml-kit/vision/barcode-scanning/android
-https://github.com/dm77/barcodescanner
-https://github.com/googlesamples/mlkit/tree/master/android/material-showcase
+- https://developer.android.com/training/camerax
+- https://developers.google.com/ml-kit/vision/barcode-scanning/android
+- https://github.com/dm77/barcodescanner
+- https://github.com/googlesamples/mlkit/tree/master/android/material-showcase

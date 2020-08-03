@@ -1,4 +1,4 @@
-# Introducing ScannerX! QR Code and Barcode Scanner with CameraX
+# Introducing ScannerX! QR Code and Barcode Scanning with CameraX
 
 Creating a QR code or barcode scanner was a tediuos task for developers as it required setting up lots of stuff related to Camera. Camera APIs have never been fun to work with. Traditional Camera APIs in Android are not reliable as they do not work for all the mobile phones universally. 
 

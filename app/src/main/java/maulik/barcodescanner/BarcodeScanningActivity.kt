@@ -129,7 +129,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
 
         imageAnalysis.setAnalyzer(cameraExecutor, analyzer)
 
-        preview.setSurfaceProvider(binding.cameraPreview.createSurfaceProvider())
+        preview.setSurfaceProvider(binding.cameraPreview.surfaceProvider)
 
         val camera =
             cameraProvider?.bindToLifecycle(this, cameraSelector, imageAnalysis, preview)

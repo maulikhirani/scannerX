@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                app:attributeName="translationY"
+                app:customFloatValue="-120" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/cardMlKit"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp">
+            <CustomAttribute
+                app:attributeName="translationX"
+                app:customFloatValue="-200" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/cardZxing"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/cardMlKit"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp">
+            <CustomAttribute
+                app:attributeName="translationX"
+                app:customFloatValue="200" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv_developer"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                app:attributeName="translationY"
+                app:customFloatValue="120" />
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                app:attributeName="translationY"
+                app:customFloatValue="0" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/cardMlKit"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp">
+            <CustomAttribute
+                app:attributeName="translationX"
+                app:customFloatValue="0.0" />
+        </Constraint>
+        <Constraint
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/cardMlKit"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/cardZxing"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp" >
+            <CustomAttribute
+                app:attributeName="translationX"
+                app:customFloatValue="0.0" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv_developer"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                app:attributeName="translationY"
+                app:customFloatValue="0.0" />
+        </Constraint>
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="1000"
+        app:motionInterpolator="bounce"
+        app:autoTransition="animateToEnd"/>
+</MotionScene>

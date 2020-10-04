@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QR/Barcode Scanner</string>
+    <string name="app_name">ScannerX</string>
     <string name="start_scanning">Start Scanning</string>
     <string name="turn_flash_on_off">Turn Flash On/Off</string>
     <string name="view_finder">View Finder</string>

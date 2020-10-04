@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    app:layoutDescription="@xml/activity_main_scene">
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_16sdp"
-        android:textSize="@dimen/_32sdp"
+        android:textSize="@dimen/_38sdp"
         android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +100,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
+        android:id="@+id/tv_developer"
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -109,4 +112,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

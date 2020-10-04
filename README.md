@@ -18,7 +18,7 @@ ScannerX features following barcode scanner SDKs:
 
 You can pick which SDK you want to use for scanning from the app itself. This will also help you compare how both popular SDKs perform in various positions and distances.
 
-![Scanner Options](https://dl3.pushbulletusercontent.com/zjezyPGUkR36UpnK2Khlzgg1BiQGexDD/Webp.net-resizeimage.jpg) ![Scanning Result](https://dl3.pushbulletusercontent.com/wHJjECOlKJWanVB8iIvHdiMDfsL4Qle3/Webp.net-resizeimage%20%281%29.jpg)
+![Scanner Options](https://dl3.pushbulletusercontent.com/xCy5dOtFn3incr6e6hVJKuPEyfhTJQa2/Webp.net-resizeimage.png) ![Scanning Result](https://dl3.pushbulletusercontent.com/wHJjECOlKJWanVB8iIvHdiMDfsL4Qle3/Webp.net-resizeimage%20%281%29.jpg)
 
 **Other features of ScannerX includes:**
 - A Square(ish) transparent viewfinder with semi-transparent overlay on top of camera preview (transparent hole in non-transparent layout)

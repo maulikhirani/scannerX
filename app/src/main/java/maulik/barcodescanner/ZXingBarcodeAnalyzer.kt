@@ -13,7 +13,7 @@ import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
 
 
-class ZXingBarcodeAnalyzer(val listener: ScanningResultListener) : ImageAnalysis.Analyzer {
+class ZXingBarcodeAnalyzer(private val listener: ScanningResultListener) : ImageAnalysis.Analyzer {
 
     private var multiFormatReader: MultiFormatReader = MultiFormatReader()
     private var isScanning = AtomicBoolean(false)

@@ -16,7 +16,7 @@ const val ARG_SCANNING_RESULT = "scanning_result"
 
 class ScannerResultDialog(private val listener: DialogDismissListener) : BottomSheetDialogFragment() {
 
-    lateinit var binding: FragmentScannerResultDialogListDialogBinding
+    private lateinit var binding: FragmentScannerResultDialogListDialogBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

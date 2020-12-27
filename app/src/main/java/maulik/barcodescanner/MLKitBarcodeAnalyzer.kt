@@ -7,9 +7,9 @@ import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 
-class MLKitBarcodeAnalyzer(val listener: ScanningResultListener) : ImageAnalysis.Analyzer {
+class MLKitBarcodeAnalyzer(private val listener: ScanningResultListener) : ImageAnalysis.Analyzer {
 
-    var isScanning: Boolean = false
+    private var isScanning: Boolean = false
 
     @ExperimentalGetImage
     override fun analyze(imageProxy: ImageProxy) {

@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun startScanning() {
+    private fun startScanning() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.CAMERA

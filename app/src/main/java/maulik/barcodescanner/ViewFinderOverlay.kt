@@ -23,10 +23,10 @@ class ViewFinderOverlay(context: Context, attrs: AttributeSet) : View(context, a
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
-    val boxCornerRadius: Float =
+    private val boxCornerRadius: Float =
         context.resources.getDimensionPixelOffset(R.dimen.barcode_reticle_corner_radius).toFloat()
 
-    var boxRect: RectF? = null
+    private var boxRect: RectF? = null
 
     fun setViewFinder() {
         val overlayWidth = width.toFloat()

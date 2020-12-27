@@ -14,7 +14,6 @@ import androidx.camera.core.Preview
 import androidx.camera.core.TorchState
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.google.common.util.concurrent.ListenableFuture
 import maulik.barcodescanner.databinding.ActivityBarcodeScanningBinding
 import java.util.concurrent.ExecutorService
@@ -57,7 +56,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
         // Initialize our background executor
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        cameraProviderFuture.addListener(Runnable {
+        cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
             bindPreview(cameraProvider)
         }, ContextCompat.getMainExecutor(this))
@@ -141,7 +140,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
                 camera.cameraControl.enableTorch(!flashEnabled)
             }
 
-            camera.cameraInfo.torchState.observe(this, Observer {
+            camera.cameraInfo.torchState.observe(this) {
                 it?.let { torchState ->
                     if (torchState == TorchState.ON) {
                         flashEnabled = true
@@ -151,7 +150,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
                         binding.ivFlashControl.setImageResource(R.drawable.ic_round_flash_off)
                     }
                 }
-            })
+            }
         }
 
 

@@ -1,4 +1,4 @@
-package maulik.barcodescanner
+package maulik.barcodescanner.ui
 
 import android.content.Context
 import android.content.Intent
@@ -15,6 +15,10 @@ import androidx.camera.core.TorchState
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.ListenableFuture
+import maulik.barcodescanner.R
+import maulik.barcodescanner.analyzer.MLKitBarcodeAnalyzer
+import maulik.barcodescanner.analyzer.ScanningResultListener
+import maulik.barcodescanner.analyzer.ZXingBarcodeAnalyzer
 import maulik.barcodescanner.databinding.ActivityBarcodeScanningBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -109,8 +113,9 @@ class BarcodeScanningActivity : AppCompatActivity() {
                 runOnUiThread {
                     imageAnalysis.clearAnalyzer()
                     cameraProvider?.unbindAll()
-                    ScannerResultDialog
-                        .newInstance(result, object : ScannerResultDialog.DialogDismissListener {
+                    ScannerResultDialog.newInstance(
+                        result,
+                        object : ScannerResultDialog.DialogDismissListener {
                             override fun onDismiss() {
                                 bindPreview(cameraProvider)
                             }

@@ -1,4 +1,4 @@
-package maulik.barcodescanner
+package maulik.barcodescanner.ui
 
 import android.content.ClipData
 import android.content.ClipboardManager

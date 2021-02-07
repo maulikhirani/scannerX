@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
     tools:background="@android:color/white"
-    tools:context=".BarcodeScanningActivity">
+    tools:context=".ui.BarcodeScanningActivity">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/cameraPreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <maulik.barcodescanner.ViewFinderOverlay
+    <maulik.barcodescanner.ui.custom.ViewFinderOverlay
         android:id="@+id/overlay"
         android:layerType="software"
         android:layout_width="match_parent"

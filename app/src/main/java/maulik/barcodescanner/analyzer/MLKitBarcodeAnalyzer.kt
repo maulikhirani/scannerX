@@ -1,4 +1,4 @@
-package maulik.barcodescanner
+package maulik.barcodescanner.analyzer
 
 import android.util.Log
 import androidx.camera.core.ExperimentalGetImage

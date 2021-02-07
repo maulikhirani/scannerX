@@ -1,10 +1,11 @@
-package maulik.barcodescanner
+package maulik.barcodescanner.ui.custom
 
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
+import maulik.barcodescanner.R
 
 class ViewFinderOverlay(context: Context, attrs: AttributeSet) : View(context, attrs) {
 

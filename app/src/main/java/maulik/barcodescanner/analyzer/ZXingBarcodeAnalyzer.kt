@@ -1,4 +1,4 @@
-package maulik.barcodescanner
+package maulik.barcodescanner.analyzer
 
 import android.graphics.ImageFormat
 import android.util.Log

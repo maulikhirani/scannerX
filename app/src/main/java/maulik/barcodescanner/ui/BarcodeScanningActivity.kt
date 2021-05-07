@@ -88,7 +88,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
             .build()
 
         val imageAnalysis = ImageAnalysis.Builder()
-            .setTargetResolution(Size(1280, 720))
+            .setTargetResolution(Size(binding.cameraPreview.width, binding.cameraPreview.height))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 

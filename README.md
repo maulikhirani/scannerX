@@ -2,7 +2,7 @@
 
 Creating a QR code or barcode scanner was a tediuos task for developers as it required setting up lots of stuff related to Camera. Camera APIs have never been fun to work with. Traditional Camera APIs in Android are not reliable as they do not work for all the mobile phones universally. 
 
-But this is not the case anymore. With the latest library-bundle introduced as part of Android Jetpack - [CameraX (Beta)](https://developer.android.com/training/camerax) - we no longer need to worry about all the boilerplate code to setup camera preview and image analysis for scanning barcodes.
+But this is not the case anymore. With the latest library-bundle introduced as part of Android Jetpack - [CameraX](https://developer.android.com/training/camerax) - we no longer need to worry about all the boilerplate code to setup camera preview and image analysis for scanning barcodes.
 
 ## ScannerX App
 

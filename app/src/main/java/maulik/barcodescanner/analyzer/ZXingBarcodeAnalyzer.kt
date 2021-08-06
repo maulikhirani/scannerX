@@ -9,6 +9,7 @@ import com.google.zxing.MultiFormatReader
 import com.google.zxing.NotFoundException
 import com.google.zxing.PlanarYUVLuminanceSource
 import com.google.zxing.common.HybridBinarizer
+import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
 
 
@@ -88,28 +89,37 @@ class ZXingBarcodeAnalyzer(private val listener: ScanningResultListener) : Image
         }
     }
 
+    /**
+     * IMPORTANT: There's a known issue with the combination of CameraX and Zxing in some phones,
+     * especially OnePlus phones, where zxing doesn't detect any QR/Barcodes at all.
+     *
+     * To resolve that issue, we're required to cleanup the image data with this fix method
+     * @see <a href="https://github.com/beemdevelopment/Aegis/commit/fb58c877d1b305b1c66db497880da5651dda78d7">Aegis Authenticator Github Commit</a>
+     *
+     * @param image imageProxy from camera analyzer
+     * @return cleaned image bytearray
+     */
     private fun getLuminancePlaneData(image: ImageProxy): ByteArray {
         val plane = image.planes[0]
-        val buf = plane.buffer
+        val buf: ByteBuffer = plane.buffer
         val data = ByteArray(buf.remaining())
-        buf[data]
+        buf.get(data)
         buf.rewind()
         val width = image.width
         val height = image.height
         val rowStride = plane.rowStride
         val pixelStride = plane.pixelStride
-        if (width != rowStride || pixelStride != 1) {
-            // remove padding from the Y plane data
-            val cleanData = ByteArray(width * height)
-            for (y in 0 until height) {
-                for (x in 0 until width) {
-                    cleanData[y * width + x] = data[y * rowStride + x * pixelStride]
-                }
+
+        // remove padding from the Y plane data
+        val cleanData = ByteArray(width * height)
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                cleanData[y * width + x] = data[y * rowStride + x * pixelStride]
             }
-            return cleanData
         }
-        return data
+        return cleanData
     }
+
 
     private class RotatedImage(var byteArray: ByteArray, var width: Int, var height: Int)
 }

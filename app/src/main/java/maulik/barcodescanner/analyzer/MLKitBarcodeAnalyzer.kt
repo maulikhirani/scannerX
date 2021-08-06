@@ -26,7 +26,7 @@ class MLKitBarcodeAnalyzer(private val listener: ScanningResultListener) : Image
                     // Task completed successfully
                     // ...
 
-                    barcodes?.firstOrNull().let { barcode ->
+                    barcodes.firstOrNull().let { barcode ->
                         val rawValue = barcode?.rawValue
                         rawValue?.let {
                             Log.d("Barcode", it)

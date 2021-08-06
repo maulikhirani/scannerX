@@ -9,7 +9,6 @@ import com.google.zxing.MultiFormatReader
 import com.google.zxing.NotFoundException
 import com.google.zxing.PlanarYUVLuminanceSource
 import com.google.zxing.common.HybridBinarizer
-import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
 
 
@@ -30,11 +29,7 @@ class ZXingBarcodeAnalyzer(private val listener: ScanningResultListener) : Image
         if ((image.format == ImageFormat.YUV_420_888 || image.format == ImageFormat.YUV_422_888
                     || image.format == ImageFormat.YUV_444_888) && image.planes.size == 3
         ) {
-            val buffer: ByteBuffer = image.planes[0].buffer
-            val bytes = ByteArray(buffer.remaining())
-            buffer.get(bytes)
-
-            val rotatedImage = RotatedImage(bytes, image.width, image.height)
+            val rotatedImage = RotatedImage(getLuminancePlaneData(image), image.width, image.height)
             rotateImageArray(rotatedImage, image.imageInfo.rotationDegrees)
 
             val planarYUVLuminanceSource = PlanarYUVLuminanceSource(
@@ -91,6 +86,29 @@ class ZXingBarcodeAnalyzer(private val listener: ScanningResultListener) : Image
             imageToRotate.height = width
             imageToRotate.width = height
         }
+    }
+
+    private fun getLuminancePlaneData(image: ImageProxy): ByteArray {
+        val plane = image.planes[0]
+        val buf = plane.buffer
+        val data = ByteArray(buf.remaining())
+        buf[data]
+        buf.rewind()
+        val width = image.width
+        val height = image.height
+        val rowStride = plane.rowStride
+        val pixelStride = plane.pixelStride
+        if (width != rowStride || pixelStride != 1) {
+            // remove padding from the Y plane data
+            val cleanData = ByteArray(width * height)
+            for (y in 0 until height) {
+                for (x in 0 until width) {
+                    cleanData[y * width + x] = data[y * rowStride + x * pixelStride]
+                }
+            }
+            return cleanData
+        }
+        return data
     }
 
     private class RotatedImage(var byteArray: ByteArray, var width: Int, var height: Int)

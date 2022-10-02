@@ -6,7 +6,7 @@ But this is not the case anymore. With the latest library-bundle introduced as p
 
 ## ScannerX App
 
-![ScannerX Cover](https://dl3.pushbulletusercontent.com/7L78kPf7sa2TT2ZYK38ZX8Y93euztRVQ/ScannerCover.jpg)
+![ScannerCover](https://user-images.githubusercontent.com/25861055/128851911-4a6d77d6-8318-4cf6-99bd-ee324318b541.jpg)
 
 ScannerX app is a showcase of how the QR/Barcode scanner can be implemented with the use of CameraX libraries. It also focuses on the demonstrating how different scanner SDKs can be incorporated with CameraX. 
 
@@ -18,7 +18,8 @@ ScannerX features following barcode scanner SDKs:
 
 You can pick which SDK you want to use for scanning from the app itself. This will also help you compare how both popular SDKs perform in various positions and distances.
 
-![Scanner Options](https://dl3.pushbulletusercontent.com/xCy5dOtFn3incr6e6hVJKuPEyfhTJQa2/Webp.net-resizeimage.png) ![Scanning Result](https://dl3.pushbulletusercontent.com/wHJjECOlKJWanVB8iIvHdiMDfsL4Qle3/Webp.net-resizeimage%20%281%29.jpg)
+![Scanner Options](https://user-images.githubusercontent.com/25861055/128852109-831a017b-b4b3-4012-9e9e-f333f3b9a3b0.jpg)
+ ![Scanning Result](https://user-images.githubusercontent.com/25861055/128852186-82ba5dcb-063c-451e-b3bd-c0c6e08b3fe7.jpg)
 
 **Other features of ScannerX includes:**
 - A Square(ish) transparent viewfinder with semi-transparent overlay on top of camera preview (transparent hole in non-transparent layout)

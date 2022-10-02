@@ -14,10 +14,12 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.BarcodeScanningActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/FullScreenTheme"/>
+            android:theme="@style/FullScreenTheme"
+            android:exported="false"/>
         <activity android:name=".ui.MainActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/NoActionBarTheme">
+            android:theme="@style/NoActionBarTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
